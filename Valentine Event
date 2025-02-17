@@ -36,7 +36,7 @@ Tabs.Main:AddDropdown({
         Name = "Distance Upper",
         Options = {"1000", "1500", "2000"},
         MultiSelect = false,
-        Default = {"500"},
+        Default = {"1000"},
 	Callback = function(value)
 _G.DistanceUpper = value			
 end})
@@ -260,9 +260,9 @@ Tabs.Main:AddToggle({
 _G.HideAllUI = value
 game:GetService("RunService").RenderStepped:Connect(function()
 if _G.HideAllUI then
-game:GetService("Players").LocalPlayer.PlayerGui.Shared.Visible = false
+game:GetService("Players").LocalPlayer.PlayerGui.Shared.Enabled = false
 else
-game:GetService("Players").LocalPlayer.PlayerGui.Shared.Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui.Shared.Enabled = true
 end
 end)
 end})
@@ -282,9 +282,9 @@ Tabs.Main:AddToggle({
 _G.DisabledChatMessager = value
 game:GetService("RunService").RenderStepped:Connect(function()
 if _G.DisabledChatMessager then
-game:GetService("Players").LocalPlayer.PlayerGui.Chat.Visible = false
+game:GetService("Players").LocalPlayer.PlayerGui.Chat.Enabled = false
 else
-game:GetService("Players").LocalPlayer.PlayerGui.Chat.Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui.Chat.Enabled = true
 end
 end)
 end})
