@@ -254,9 +254,10 @@ ImageLabel.BackgroundColor3 = Color3.fromRGB(0,0,0)
 ImageLabel.Size = UDim2.new(1,0,1,0)
 ImageLabel.Text = "YOUHUB\nAFK Screen\nPlaytime:" .. workspace.DistributedGameTime
 ImageLabel.TextSize = "50"
+ImageLabel.Font = "Roboto"
 ImageLabel.TextColor3 = Color3.new(1,1,1)
 game:GetService("RunService").RenderStepped:Connect(function()
-ImageLabel.Text = string.format("%s%1.f", "YOUHUB\nAFK Screen\nPlaytime:",workspace.DistributedGameTime .. "s")
+ImageLabel.Text = string.format("%s%1.f", "YOUHUB\nAFK Screen\nPlaytime:",workspace.DistributedGameTime)
 ImageLabel.BackgroundColor3 = Color3.fromRGB(_G.RedRGB,_G.GreenRGB,_G.BlueRGB)
 end)
 else
