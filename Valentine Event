@@ -236,7 +236,7 @@ end})
 Tabs.Main:AddToggle({
 	Name = "AFK Screen",
 	Callback = function(value)
-if v then
+if value then
 local ScreenGui = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer.PlayerGui)
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Name = "AFKScreen"
@@ -259,6 +259,40 @@ end
 end
 end
 end})
+Tabs.Main:AddToggle({
+	Name = "Hide All Ui",
+	Callback = function(value)
+_G.HideAllUI = value
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.HideAllUI then
+game:GetService("Players").LocalPlayer.PlayerGui.Shared.Visible = false
+else
+game:GetService("Players").LocalPlayer.PlayerGui.Shared.Visible = true
+end
+end)
+end})
+Tabs.Main:AddToggle({
+	Name = "Disabled Night Vision Effect",
+	Callback = function(value)
+_G.DisabledNightVisionEffect = value
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.DisabledNightVisionEffect then
+game:GetService("Players").LocalPlayer.PlayerGui.Shared.HUD.NightVision.Visible = false
+end
+end)
+end})
+Tabs.Main:AddToggle({
+	Name = "Disabled Chat Messager",
+	Callback = function(value)
+_G.DisabledChatMessager = value
+game:GetService("RunService").RenderStepped:Connect(function()
+if _G.DisabledChatMessager then
+game:GetService("Players").LocalPlayer.PlayerGui.Chat.Visible = false
+else
+game:GetService("Players").LocalPlayer.PlayerGui.Chat.Visible = true
+end
+end)
+end})
 Tabs.Visual:AddSection({"ESP"})
 Tabs.Visual:AddToggle({
 	Name = "Nextbots ESP",
@@ -269,8 +303,18 @@ while wait(1) do
 if _G.NextbotsESP then
 local GamePlayers = workspace.Game.Players
 for i, v in pairs(GamePlayers:GetChildren()) do
-if not game.Players:FindFirstChild(v.Name) and not v.HumanoidRootPart:FindFirstChild("Nextbots_ESP") then
-Cylinder(v.HumanoidRootPart, "Nextbots_ESP")
+if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
+for i = 1, 100 do
+if v:FindFirstChildOfClass("Part") then
+break
+end
+if i == 100 then
+return
+end
+end
+v:FindFirstChildOfClass("Part").Transparency = 0.99
+Instance.new("Humanoid",v)
+Highlight(v, "Nextbots_ESP")
 end
 end
 else
