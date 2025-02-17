@@ -7,7 +7,7 @@ Highlight.FillTransparency = 0.75
 Highlight.OutlineTransparency = 0
 Highlight.Name = title
 end
-local function Highlight(child, title)
+local function Highlight2(child, title)
 local Highlight = Instance.new('Highlight', child)
 Highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 Highlight.FillColor = Color3.fromRGB(255, 0, 0)
@@ -254,23 +254,23 @@ Tabs.Main:AddToggle({
 	Name = "Hide All Ui",
 	Callback = function(value)
 _G.HideAllUI = value
-game:GetService("RunService").RenderStepped:Connect(function()
-if _G.HideAllUI and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Shared") then
+while _G.HideAllUI do wait(0.5)
+if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Shared") then
 game:GetService("Players").LocalPlayer.PlayerGui.Shared.Enabled = false
 else
 game:GetService("Players").LocalPlayer.PlayerGui.Shared.Enabled = true
 end
-end)
+end
 end})
 Tabs.Main:AddToggle({
 	Name = "Disabled Night Vision Effect",
 	Callback = function(value)
 _G.DisabledNightVisionEffect = value
-game:GetService("RunService").RenderStepped:Connect(function()
-if _G.DisabledNightVisionEffect and game:GetService("Players").LocalPlayer.PlayerGui.Shared.HUD:FindFirstChild("NightVision") then
+while _G.DisabledNightVisionEffect do wait()
+if game:GetService("Players").LocalPlayer.PlayerGui.Shared.HUD:FindFirstChild("NightVision") then
 game:GetService("Players").LocalPlayer.PlayerGui.Shared.HUD.NightVision.Visible = false
 end
-end)
+end
 end})
 Tabs.Main:AddToggle({
 	Name = "Disabled Chat Messager",
