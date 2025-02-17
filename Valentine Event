@@ -74,7 +74,7 @@ Tabs.Main:AddToggle({
 	Description = "Auto Claim Tickets",
 	Callback=function(value)
 _G.AutoTickets = value
-		while task.wait(0.25) and _G.AutoTickets do
+		while task.wait(0.1) and _G.AutoTickets do
 			if not value then
 				break
 			end
