@@ -74,11 +74,6 @@ Tabs.Main:AddToggle({
 	Description = "Auto Claim Tickets",
 	Callback=function(value)
 _G.AutoTickets = value
-if value then
-local part = Instance.new("Part", workspace)
-			part.Anchored = true
-			part.CFrame = CFrame.new(100, 996, 100)
-		end
 		while task.wait(0.25) and _G.AutoTickets do
 			if not value then
 				break
