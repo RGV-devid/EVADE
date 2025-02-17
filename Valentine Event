@@ -256,9 +256,7 @@ Tabs.Main:AddToggle({
 _G.HideAllUI = value
 while _G.HideAllUI do wait(0.5)
 if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Shared") then
-game:GetService("Players").LocalPlayer.PlayerGui.Shared.Enabled = false
-else
-game:GetService("Players").LocalPlayer.PlayerGui.Shared.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.Shared.Enabled = not _G.HideAllUI
 end
 end
 end})
@@ -325,11 +323,11 @@ Tabs.Visual:AddToggle({
 _G.PlayersESP = value
 while wait(1) do
 if _G.PlayersESP then
-for _,v in pairs(workspace.Game.Players:GetChildren()) do
-if not v:FindFirstChild("Players_ESP") then
-Highlight(v, "Players_ESP")
+for _,Player in pairs(game:GetService("Players"):GetPlayers()) do
+if Player ~= game:GetService("Players").LocalPlayer then
+Highlight(Player.Character, "Players_ESP")
 end
-end		
+end	
 else
 task.spawn(function()
 for i, v in pairs(workspace:GetDescendants()) do
