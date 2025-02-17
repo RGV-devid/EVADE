@@ -214,33 +214,6 @@ game:GetService("ReplicatedStorage").Events.Character.Whistle:FireServer(true)
 end
 end})
 Tabs.Main:AddSection({"Other"})
-Tabs.Main:AddSlider({
-  Name = "Red RGB Color",
-  Min = 0,
-  Max = 255,
-  Increase = 1,
-  Default = 0,
-  Callback = function(value)
-_G.RedRGB = value
-end})
-Tabs.Main:AddSlider({
-  Name = "Green RGB Color",
-  Min = 0,
-  Max = 255,
-  Increase = 1,
-  Default = 0,
-  Callback = function(value)
-_G.GreenRGB = value
-end})
-Tabs.Main:AddSlider({
-  Name = "Blue RGB Color",
-  Min = 0,
-  Max = 255,
-  Increase = 1,
-  Default = 0,
-  Callback = function(value)
-_G.BlueRGB = value
-end})
 Tabs.Main:AddToggle({
 	Name = "AFK Screen",
 	Callback = function(value)
@@ -250,7 +223,7 @@ ScreenGui.ResetOnSpawn = false
 ScreenGui.Name = "AFKScreen"
 local ImageLabel = Instance.new("TextLabel", ScreenGui)
 ImageLabel.Position = UDim2.new(0,0,0,0)
-ImageLabel.BackgroundColor3 = Color3.fromRGB(0,0,0)
+ImageLabel.BackgroundColor3 = Color3.fromRGB(90,0,255)
 ImageLabel.Size = UDim2.new(1,0,1,0)
 ImageLabel.Text = "YOUHUB\nAFK Screen\nPlaytime:" .. workspace.DistributedGameTime
 ImageLabel.TextSize = "50"
@@ -258,7 +231,6 @@ ImageLabel.Font = "Roboto"
 ImageLabel.TextColor3 = Color3.new(1,1,1)
 game:GetService("RunService").RenderStepped:Connect(function()
 ImageLabel.Text = string.format("%s%1.f", "YOUHUB\nAFK Screen\nPlaytime:",workspace.DistributedGameTime)
-ImageLabel.BackgroundColor3 = Color3.fromRGB(_G.RedRGB,_G.GreenRGB,_G.BlueRGB)
 end)
 else
 for _,v in pairs(game.Players:GetDescendants()) do
@@ -272,34 +244,13 @@ Tabs.Main:AddToggle({
 	Name = "Hide All Ui",
 	Callback = function(value)
 _G.HideAllUI = value
-while _G.HideAllUI do wait(0.5)
+while _G.HideAllUI do wait(1)
 if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Shared") then
 game:GetService("Players").LocalPlayer.PlayerGui.Shared.Enabled = not _G.HideAllUI
 end
 end
 end})
-Tabs.Main:AddToggle({
-	Name = "Disabled Night Vision Effect",
-	Callback = function(value)
-_G.DisabledNightVisionEffect = value
-while _G.DisabledNightVisionEffect do wait()
-if game:GetService("Players").LocalPlayer.PlayerGui.Shared.HUD:FindFirstChild("NightVision") then
-game:GetService("Players").LocalPlayer.PlayerGui.Shared.HUD.NightVision.Visible = false
-end
-end
-end})
-Tabs.Main:AddToggle({
-	Name = "Disabled Chat Messager",
-	Callback = function(value)
-_G.DisabledChatMessager = value
-game:GetService("RunService").RenderStepped:Connect(function()
-if _G.DisabledChatMessager and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Chat") then
-game:GetService("Players").LocalPlayer.PlayerGui.Chat.Enabled = false
-else
-game:GetService("Players").LocalPlayer.PlayerGui.Chat.Enabled = true
-end
-end)
-end})
+
 Tabs.Visual:AddSection({"ESP"})
 Tabs.Visual:AddToggle({
 	Name = "Nextbots ESP",
@@ -311,14 +262,6 @@ if _G.NextbotsESP then
 local GamePlayers = workspace.Game.Players
 for i, v in pairs(GamePlayers:GetChildren()) do
 if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
-for i = 1, 100 do
-if v:FindFirstChildOfClass("Part") then
-break
-end
-if i == 100 then
-return
-end
-end
 v:FindFirstChildOfClass("Part").Transparency = 0.99
 v:FindFirstChildOfClass("Part").Shape = "Ball"
 Instance.new("Humanoid",v)
