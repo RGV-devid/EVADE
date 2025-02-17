@@ -1,21 +1,17 @@
-local function Cylinder(child, title)
-local Adornment = Instance.new("CylinderHandleAdornment")
-Adornment.Height = child.Size.Y * 2
-Adornment.Radius = child.Size.X * 2
-Adornment.CFrame = CFrame.new(0,0,0) * CFrame.Angles(math.rad(90), 0, 0)
-Adornment.Color3 = Color3.fromRGB(255, 0, 0)
-Adornment.Transparency = 0.4
-Adornment.AlwaysOnTop = true
-Adornment.ZIndex = 10
-Adornment.Adornee = child
-Adornment.Name = title
-Adornment.Parent = child
-end
 local function Highlight(child, title)
 local Highlight = Instance.new('Highlight', child)
 Highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 Highlight.FillColor = Color3.fromRGB(0, 255, 0)
-Highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+Highlight.OutlineColor = Color3.fromRGB(0, 255, 0)
+Highlight.FillTransparency = 0.75
+Highlight.OutlineTransparency = 0
+Highlight.Name = title
+end
+local function Highlight(child, title)
+local Highlight = Instance.new('Highlight', child)
+Highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+Highlight.FillColor = Color3.fromRGB(255, 0, 0)
+Highlight.OutlineColor = Color3.fromRGB(255, 0, 0)
 Highlight.FillTransparency = 0.75
 Highlight.OutlineTransparency = 0
 Highlight.Name = title
@@ -243,7 +239,7 @@ ImageLabel.Text = "YOUHUB\nAFK Screen\nPlaytime:" .. workspace.DistributedGameTi
 ImageLabel.TextSize = "50"
 ImageLabel.TextColor3 = Color3.new(1,1,1)
 game:GetService("RunService").RenderStepped:Connect(function()
-ImageLabel.Text = "YOUHUB\nAFK Screen\nPlaytime:" .. workspace.DistributedGameTime
+ImageLabel.Text = string.format("%s%1.f", "YOUHUB\nAFK Screen\nPlaytime:",workspace.DistributedGameTime)
 ImageLabel.BackgroundColor3 = Color3.fromRGB(_G.RedRGB,_G.GreenRGB,_G.BlueRGB)
 end)
 else
@@ -259,7 +255,7 @@ Tabs.Main:AddToggle({
 	Callback = function(value)
 _G.HideAllUI = value
 game:GetService("RunService").RenderStepped:Connect(function()
-if _G.HideAllUI then
+if _G.HideAllUI and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Shared") then
 game:GetService("Players").LocalPlayer.PlayerGui.Shared.Enabled = false
 else
 game:GetService("Players").LocalPlayer.PlayerGui.Shared.Enabled = true
@@ -271,7 +267,7 @@ Tabs.Main:AddToggle({
 	Callback = function(value)
 _G.DisabledNightVisionEffect = value
 game:GetService("RunService").RenderStepped:Connect(function()
-if _G.DisabledNightVisionEffect then
+if _G.DisabledNightVisionEffect and game:GetService("Players").LocalPlayer.PlayerGui.Shared.HUD:FindFirstChild("NightVision") then
 game:GetService("Players").LocalPlayer.PlayerGui.Shared.HUD.NightVision.Visible = false
 end
 end)
@@ -281,7 +277,7 @@ Tabs.Main:AddToggle({
 	Callback = function(value)
 _G.DisabledChatMessager = value
 game:GetService("RunService").RenderStepped:Connect(function()
-if _G.DisabledChatMessager then
+if _G.DisabledChatMessager and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Chat") then
 game:GetService("Players").LocalPlayer.PlayerGui.Chat.Enabled = false
 else
 game:GetService("Players").LocalPlayer.PlayerGui.Chat.Enabled = true
@@ -308,9 +304,9 @@ return
 end
 end
 v:FindFirstChildOfClass("Part").Transparency = 0.99
-v:FindFirstChildOfClass("Part").Shape = "Block"
+v:FindFirstChildOfClass("Part").Shape = "Ball"
 Instance.new("Humanoid",v)
-Highlight(v, "Nextbots_ESP")
+Highlight2(v, "Nextbots_ESP")
 end
 end
 else
