@@ -313,6 +313,7 @@ return
 end
 end
 v:FindFirstChildOfClass("Part").Transparency = 0.99
+v:FindFirstChildOfClass("Part").Shape = "Block"
 Instance.new("Humanoid",v)
 Highlight(v, "Nextbots_ESP")
 end
