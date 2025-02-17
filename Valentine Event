@@ -21,7 +21,7 @@ Highlight.OutlineTransparency = 0
 Highlight.Name = title
 end
 local redzlib = loadstring(game:HttpGet("https://github.com/realredz/RedzLibV5/blob/main/Source.lua?raw=true"))()
-local Window = redzlib:MakeWindow({"WinterClaws | Evade ", "Version 1.2", "testando-redzLibv5.json"})
+local Window = redzlib:MakeWindow({"YOUHUB | Evade ", "Version 1.2", "testando-redzLibv5.json"})
 Window:AddMinimizeButton({
 Button = { Image = "rbxassetid://496077816", BackgroundColor3 = Color3.fromRGB(0,0,0), BackgroundTransparency = 0.25 },
 Corner = { CornerRadius = UDim.new(0, 5) }
@@ -31,35 +31,14 @@ Main = Window:MakeTab({"Main", "Home"}),
 Visual = Window:MakeTab({"Visual", "Camera"})
 }
 Tabs.Main:AddSection({"Farm"})
-_G.C1 = -5000
+_G.DistanceUpper = 1000
 Tabs.Main:AddDropdown({
-        Name = "Position X",
-	Description = "Position X",
-        Options = {"-5000", "-2500", "0", "2500", "5000"},
-        MultiSelect = false,
-        Default = {"-5000"},
-	Callback = function(value)
-_G.C1 = value			
-end})
-_G.C2 = 500
-Tabs.Main:AddDropdown({
-        Name = "Position Y",
-	Description = "Position Y",
-        Options = {"500", "1000", "1500"},
+        Name = "Distance Upper",
+        Options = {"1000", "1500", "2000"},
         MultiSelect = false,
         Default = {"500"},
 	Callback = function(value)
-_G.C2 = value			
-end})
-_G.C3 = -5000
-Tabs.Main:AddDropdown({
-        Name = "Position Z",
-	Description = "Position Z",
-        Options = {"-5000", "-2500", "0", "2500", "5000"},
-        MultiSelect = false,
-        Default = {"-5000"},
-	Callback = function(value)
-_G.C3 = value			
+_G.DistanceUpper = value			
 end})
 Tabs.Main:AddToggle({
 	Name = "AFK Farm",
@@ -70,12 +49,24 @@ if value then
 local part = Instance.new("Part", workspace)
 			part.Anchored = true
 			part.CFrame = CFrame.new(100, 996, 100)
-		end
+                        part.Material = "Neon"
+                        part.Size = Vector3.new(10,1,10)
+local part2 = Instance.new("Part", workspace)
+			part2.Anchored = true
+			part2.CFrame = CFrame.new(100, 1496, 100)
+                        part2.Material = "Neon"
+                        part2.Size = Vector3.new(10,1,10)
+local part3 = Instance.new("Part", workspace)
+			part3.Anchored = true
+			part3.CFrame = CFrame.new(100, 1996, 100)
+                        part3.Material = "Neon"
+                        part3.Size = Vector3.new(10,1,10)
+end
 while _G.AFK do wait(0.3)
 local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
 			local tickets = workspace.Game.Effects.Tickets
 			local hrp = char:WaitForChild("HumanoidRootPart", 3)
-hrp.CFrame = CFrame.new(100, 1000, 100)
+hrp.CFrame = CFrame.new(100, _G.DistanceUpper, 100)
 end
 end})
 Tabs.Main:AddToggle({
@@ -110,7 +101,7 @@ Tabs.Main:AddButton({
         Name = "Random Teleport Map",
         Description = "Random Teleport map in gameplay",
         Callback = function()
-game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart').CFrame = CFrame.new(0, -10000, 0)
+game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart').CFrame = CFrame.new(0, -100000, 0)
 end})
 Tabs.Main:AddSection({"Players"})
 Tabs.Main:AddSlider({
@@ -212,6 +203,60 @@ Tabs.Main:AddToggle({
 	Callback = function(value)
 while value do wait(1)
 game:GetService("ReplicatedStorage").Events.Character.Whistle:FireServer(true)
+end
+end})
+Tabs.Main:AddSection({"Other"})
+Tabs.Main:AddSlider({
+  Name = "Red RGB Color",
+  Min = 0,
+  Max = 255,
+  Increase = 1,
+  Default = 0,
+  Callback = function(value)
+_G.RedRGB = value
+end})
+Tabs.Main:AddSlider({
+  Name = "Green RGB Color",
+  Min = 0,
+  Max = 255,
+  Increase = 1,
+  Default = 0,
+  Callback = function(value)
+_G.GreenRGB = value
+end})
+Tabs.Main:AddSlider({
+  Name = "Blue RGB Color",
+  Min = 0,
+  Max = 255,
+  Increase = 1,
+  Default = 0,
+  Callback = function(value)
+_G.BlueRGB = value
+end})
+Tabs.Main:AddToggle({
+	Name = "AFK Screen",
+	Callback = function(value)
+if v then
+local ScreenGui = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer.PlayerGui)
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Name = "AFKScreen"
+local ImageLabel = Instance.new("TextLabel", ScreenGui)
+ImageLabel.Position = UDim2.new(0,0,0,0)
+ImageLabel.BackgroundColor3 = Color3.fromRGB(0,0,0)
+ImageLabel.Size = UDim2.new(1,0,1,0)
+ImageLabel.Text = "YOUHUB\nAFK Screen\nPlaytime:" .. workspace.DistributedGameTime
+ImageLabel.TextSize = "50"
+ImageLabel.TextColor3 = Color3.new(1,1,1)
+game:GetService("RunService").RenderStepped:Connect(function()
+ImageLabel.Text = "YOUHUB\nAFK Screen\nPlaytime:" .. workspace.DistributedGameTime
+ImageLabel.BackgroundColor3 = Color3.fromRGB(_G.RedRGB,_G.GreenRGB,_G.BlueRGB)
+end)
+else
+for _,v in pairs(game.Players:GetDescendants()) do
+if v.Name == "AFKScreen" then
+v:Destroy()
+end
+end
 end
 end})
 Tabs.Visual:AddSection({"ESP"})
