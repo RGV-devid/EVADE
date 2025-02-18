@@ -1,40 +1,25 @@
 print("Anti AFK")
 local GC = getconnections or get_signal_cons
-	if GC then
-		for i,v in pairs(GC(game.Players.LocalPlayer.Idled)) do
-			if v["Disable"] then
-				v["Disable"](v)
-			elseif v["Disconnect"] then
-				v["Disconnect"](v)
-			end
-		end
-	else
-		game.Players.LocalPlayer.Idled:Connect(function()
-			local VirtualUser = game:GetService("VirtualUser")
-			VirtualUser:CaptureController()
-			VirtualUser:ClickButton2(Vector2.new())
-		end)
-	end
-local function Highlight(child, title)
-local Highlight = Instance.new('Highlight', child)
-Highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-Highlight.FillColor = Color3.fromRGB(0, 255, 0)
-Highlight.OutlineColor = Color3.fromRGB(0, 255, 0)
-Highlight.FillTransparency = 0.75
-Highlight.OutlineTransparency = 0
-Highlight.Name = title
+if GC then
+for i,v in pairs(GC(game.Players.LocalPlayer.Idled)) do
+if v["Disable"] then
+v["Disable"](v)
+elseif v["Disconnect"] then
+v["Disconnect"](v)
 end
-local function Highlight2(child, title)
-local Highlight = Instance.new('Highlight', child)
-Highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-Highlight.FillColor = Color3.fromRGB(255, 0, 0)
-Highlight.OutlineColor = Color3.fromRGB(255, 0, 0)
-Highlight.FillTransparency = 0.75
-Highlight.OutlineTransparency = 0
-Highlight.Name = title
 end
-local redzlib = loadstring(game:HttpGet("https://github.com/realredz/RedzLibV5/blob/main/Source.lua?raw=true"))()
-local Window = redzlib:MakeWindow({"YOUHUB | Evade ", "Version 1.2", "testando-redzLibv5.json"})
+else
+game.Players.LocalPlayer.Idled:Connect(function()
+local VirtualUser = game:GetService("VirtualUser")
+VirtualUser:CaptureController()
+VirtualUser:ClickButton2(Vector2.new())
+end)
+end
+local Library = loadstring(game:HttpGet("https://github.com/realredz/RedzLibV5/blob/main/Source.lua?raw=true"))()
+
+local LibraryESP = loadstring(game:HttpGet("https://github.com/Cold-Script/ESPBETA/blob/main/Esp?raw=true"))()
+
+local Window = Library:MakeWindow({"YOUHUB | [💓UPD] Evade | User : " .. game.Players.LocalPlayer.Name, "Version 1.2", "testando-redzLibv5.json"})
 Window:AddMinimizeButton({
 Button = { Image = "rbxassetid://95869322194132", BackgroundColor3 = Color3.fromRGB(0,0,0), BackgroundTransparency = 0 },
 Corner = { CornerRadius = UDim.new(0, 5) }
@@ -60,25 +45,24 @@ Tabs.Main:AddToggle({
 _G.AFK = value
 if value then
 local part = Instance.new("Part", workspace)
-			part.Anchored = true
-			part.CFrame = CFrame.new(100, 996, 100)
-                        part.Material = "Neon"
-                        part.Size = Vector3.new(100,1,100)
+   part.Anchored = true
+   part.CFrame = CFrame.new(1000, 996, 1000)
+   part.Material = "Neon"
+   part.Size = Vector3.new(1000,1,1000)
 local part2 = Instance.new("Part", workspace)
-			part2.Anchored = true
-			part2.CFrame = CFrame.new(100, 1496, 100)
-                        part2.Material = "Neon"
-                        part2.Size = Vector3.new(100,1,100)
+   part2.Anchored = true
+   part2.CFrame = CFrame.new(1000, 1496, 1000)
+   part2.Material = "Neon"
+   part2.Size = Vector3.new(1000,1,1000)
 local part3 = Instance.new("Part", workspace)
-			part3.Anchored = true
-			part3.CFrame = CFrame.new(100, 1996, 100)
-                        part3.Material = "Neon"
-                        part3.Size = Vector3.new(100,1,100)
+   part3.Anchored = true
+   part3.CFrame = CFrame.new(1000, 1996, 1000)
+   part3.Material = "Neon"
+   part3.Size = Vector3.new(1000,1,1000)
 end
 while _G.AFK do wait(0.3)
 local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
-			local tickets = workspace.Game.Effects.Tickets
-			local hrp = char:WaitForChild("HumanoidRootPart", 3)
+local hrp = char:WaitForChild("HumanoidRootPart", 3)
 hrp.CFrame = CFrame.new(100, _G.DistanceUpper, 100)
 end
 end})
@@ -87,23 +71,22 @@ Tabs.Main:AddToggle({
 	Description = "Auto Claim Tickets",
 	Callback = function(value)
 _G.AutoTickets = value
-		while task.wait(0.1) and _G.AutoTickets do
-			if not value then
-				break
-			end
-			local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
-			local tickets = workspace.Game.Effects.Tickets
-			local hrp = char:WaitForChild("HumanoidRootPart", 3)
-			if hrp == nil then
-				return
-			end
-			
-			for i, v in next, tickets:GetDescendants() do
-				if v.IsA(v, "BasePart") and v.Name == "HumanoidRootPart" then
-					hrp.CFrame = CFrame.new(v.Position)
-				end
-			end
-		end
+while task.wait(0.1) and _G.AutoTickets do
+if not value then
+break
+end
+local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+local tickets = workspace.Game.Effects.Tickets
+local hrp = char:WaitForChild("HumanoidRootPart", 3)
+if hrp == nil then
+return
+end
+for i, v in next, tickets:GetDescendants() do
+if v.IsA(v, "BasePart") and v.Name == "HumanoidRootPart" then
+hrp.CFrame = CFrame.new(v.Position)
+end
+end
+end
 end})
 Tabs.Main:AddButton({
         Name = "Random Teleport Map",
@@ -245,7 +228,6 @@ Tabs.Main:AddToggle({
 	Callback = function(value)
 if value then
 local ScreenGui = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer.PlayerGui)
-ScreenGui.ResetOnSpawn = true
 ScreenGui.Name = "RoundTimerScreen"
 local Frame = Instance.new("Frame", ScreenGui)
 Frame.Position = UDim2.new(0.425,0,0.1,0)
@@ -295,49 +277,53 @@ Tabs.Visual:AddToggle({
 	Name = "Nextbots ESP",
 	Description = "Nextbots ESP",
 	Callback = function(value)
-_G.NextbotsESP = value
-while wait(1) do
-if _G.NextbotsESP then
-local GamePlayers = workspace.Game.Players
-for i, v in pairs(GamePlayers:GetChildren()) do
+if value then
+for i, v in pairs(workspace.Game.Players:GetChildren()) do
 if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
-v:FindFirstChildOfClass("Part").Transparency = 0.99
-v:FindFirstChildOfClass("Part").Shape = "Ball"
-for i = 1, 100 do if v:FindFirstChildOfClass("Part") then break end if i == 100 then return end end
-Instance.new("Humanoid",v)
-Highlight2(v, "Nextbots_ESP")
+Library:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
 end
 end
+NextbotsESP = workspace.DescendantAdded:Connect(function(v)
+if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
+Library:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
+end
+end)
 else
-for i, v in pairs(workspace:GetDescendants()) do
-if v.Name == "Nextbots_ESP" then
-v:Destroy()
-end
-end
-end
+NextbotsESP:Disconnect()
+LibraryESP:Delete("Nextbots_ESP")
 end
 end})
 Tabs.Visual:AddToggle({
 	Name = "Players ESP",
 	Description = "Players ESP",
 	Callback = function(value)
-_G.PlayersESP = value
-while wait(1) do
-if _G.PlayersESP then
+if value then
 for _,Player in pairs(game:GetService("Players"):GetPlayers()) do
 if Player ~= game:GetService("Players").LocalPlayer then
-Highlight(Player.Character, "Players_ESP")
+if not Player:GetAttribute('Downed') then
+LibraryESP:AddESP(Player.Character, v.Name, Color3.fromRGB(0,255,0), "PlayersESP")
+end
+elseif Player ~= game:GetService("Players").LocalPlayer then
+if Player:GetAttribute('Downed') then
+LibraryESP:AddESP(Player.Character, "[Downed]\n" .. v.Name, Color3.fromRGB(0,255,255), "DownedPlayersESP")
 end
 end	
-else
-task.spawn(function()
-for i, v in pairs(workspace:GetDescendants()) do
-if v.Name == "Players_ESP" then
-v:Destroy()
+end
+PlayersESP = workspace.DescendantAdded:Connect(function(v)
+if Player ~= game:GetService("Players").LocalPlayer then
+if not Player:GetAttribute('Downed') then
+LibraryESP:AddESP(Player.Character, v.Name, Color3.fromRGB(0,255,0), "PlayersESP")
+end
+elseif Player ~= game:GetService("Players").LocalPlayer then
+if Player:GetAttribute('Downed') then
+LibraryESP:AddESP(Player.Character, "[Downed]\n" .. v.Name, Color3.fromRGB(0,255,255), "DownedPlayersESP")
 end
 end
 end)
-end
+else
+PlayersESP:Disconnect()
+LibraryESP:Delete("PlayersESP")
+LibraryESP:Delete("DownedPlayersESP")
 end
 end})
 Tabs.Visual:AddSection({"Server"})
