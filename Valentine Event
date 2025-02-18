@@ -56,24 +56,24 @@ end})
 Tabs.Main:AddToggle({
 	Name = "AFK Farm",
 	Description = "Teleport Far to AFK",
-	Callback=function(value)
+	Callback = function(value)
 _G.AFK = value
 if value then
 local part = Instance.new("Part", workspace)
 			part.Anchored = true
 			part.CFrame = CFrame.new(100, 996, 100)
                         part.Material = "Neon"
-                        part.Size = Vector3.new(10,1,10)
+                        part.Size = Vector3.new(100,1,100)
 local part2 = Instance.new("Part", workspace)
 			part2.Anchored = true
 			part2.CFrame = CFrame.new(100, 1496, 100)
                         part2.Material = "Neon"
-                        part2.Size = Vector3.new(10,1,10)
+                        part2.Size = Vector3.new(100,1,100)
 local part3 = Instance.new("Part", workspace)
 			part3.Anchored = true
 			part3.CFrame = CFrame.new(100, 1996, 100)
                         part3.Material = "Neon"
-                        part3.Size = Vector3.new(10,1,10)
+                        part3.Size = Vector3.new(100,1,100)
 end
 while _G.AFK do wait(0.3)
 local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
@@ -85,7 +85,7 @@ end})
 Tabs.Main:AddToggle({
 	Name = "Auto Tickets Farm [BETA]",
 	Description = "Auto Claim Tickets",
-	Callback=function(value)
+	Callback = function(value)
 _G.AutoTickets = value
 		while task.wait(0.1) and _G.AutoTickets do
 			if not value then
@@ -109,7 +109,7 @@ Tabs.Main:AddButton({
         Name = "Random Teleport Map",
         Description = "Random Teleport map in gameplay",
         Callback = function()
-game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart').CFrame = CFrame.new(0, -100000, 0)
+game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart').CFrame = CFrame.new(0, -10000, 0)
 end})
 Tabs.Main:AddSection({"Players"})
 Tabs.Main:AddSlider({
@@ -125,7 +125,7 @@ end})
 Tabs.Main:AddToggle({
 	Name = "Fly",
 	Description = "Fly",
-	Callback=function(value)
+	Callback = function(value)
 _G.StartFly = value
 if _G.StartFly == false then
 if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") and game.Players.LocalPlayer.Character.Humanoid.RootPart and game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("VelocityHandler") and game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("GyroHandler") then
@@ -241,12 +241,50 @@ end
 end
 end})
 Tabs.Main:AddToggle({
+	Name = "Round Timer UI",
+	Callback = function(value)
+if value then
+local ScreenGui = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer.PlayerGui)
+ScreenGui.ResetOnSpawn = true
+ScreenGui.Name = "RoundTimerScreen"
+local Frame = Instance.new("Frame", ScreenGui)
+Frame.Position = UDim2.new(0.425,0,0.1,0)
+Frame.BackgroundColor3 = Color3.new(0,0,0)
+Frame.BackgroundTransparency = 0.75
+Frame.Size = UDim2.new(0.15,0,0.1,0)
+local ImageLabel = Instance.new("TextLabel", Frame)
+ImageLabel.Position = UDim2.new(0.5,0,0.4,0)
+ImageLabel.BackgroundColor3 = Color3.new(0,0,0)
+ImageLabel.BackgroundTransparency = 0.75
+ImageLabel.Size = UDim2.new(0,0,0,0)
+ImageLabel.Text = "Round Timer:\n" .. workspace.Game.Stats:GetAttribute("Timer") .. "s"
+ImageLabel.TextSize = "14"
+ImageLabel.Font = "GothamBlack"
+ImageLabel.TextColor3 = Color3.new(1,1,1)
+local UiCorner = Instance.new("UICorner", Frame)
+local UiStroke = Instance.new("UIStroke", Frame)
+UiStroke.Color = Color3.fromRGB(14,174,255)
+UiStroke.Thickness = 2
+game:GetService("RunService").RenderStepped:Connect(function()
+ImageLabel.Text = "Round Timer:\n" .. workspace.Game.Stats:GetAttribute("Timer") .. "s"
+end)
+else
+for _,v in pairs(game.Players:GetDescendants()) do
+if v.Name == "RoundTimerScreen" then
+v:Destroy()
+end
+end
+end})
+Tabs.Main:AddToggle({
 	Name = "Hide All Ui",
 	Callback = function(value)
 _G.HideAllUI = value
 while _G.HideAllUI do wait(1)
 if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Shared") then
 game:GetService("Players").LocalPlayer.PlayerGui.Shared.Enabled = not _G.HideAllUI
+end
+if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Menu") then
+game:GetService("Players").LocalPlayer.PlayerGui.Menu.Enabled = not _G.HideAllUI
 end
 end
 end})
@@ -264,6 +302,7 @@ for i, v in pairs(GamePlayers:GetChildren()) do
 if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
 v:FindFirstChildOfClass("Part").Transparency = 0.99
 v:FindFirstChildOfClass("Part").Shape = "Ball"
+for i = 1, 100 do if v:FindFirstChildOfClass("Part") then break end if i == 100 then return end end
 Instance.new("Humanoid",v)
 Highlight2(v, "Nextbots_ESP")
 end
