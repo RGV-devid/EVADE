@@ -274,6 +274,7 @@ if v.Name == "RoundTimerScreen" then
 v:Destroy()
 end
 end
+end
 end})
 Tabs.Main:AddToggle({
 	Name = "Hide All Ui",
