@@ -19,7 +19,7 @@ local Library = loadstring(game:HttpGet("https://github.com/realredz/RedzLibV5/b
 
 local LibraryESP = loadstring(game:HttpGet("https://github.com/Cold-Script/ESPBETA/blob/main/Esp?raw=true"))()
 
-local Window = Library:MakeWindow({"YOUHUB | [💓UPD] Evade | User : " .. game.Players.LocalPlayer.Name, "Version 1.2", "testando-redzLibv5.json"})
+local Window = Library:MakeWindow({"YOUHUB | [💓UPD] Evade | User : " .. game.Players.LocalPlayer.DisplayName, "Version 1.2", "testando-redzLibv5.json"})
 Window:AddMinimizeButton({
 Button = { Image = "rbxassetid://95869322194132", BackgroundColor3 = Color3.fromRGB(0,0,0), BackgroundTransparency = 0 },
 Corner = { CornerRadius = UDim.new(0, 5) }
@@ -284,7 +284,7 @@ if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ES
 LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
 end
 end
-NextbotsESP = workspace.DescendantAdded:Connect(function(v)
+NextbotsESP = workspace.Game.Players.ChildAdded:Connect(function(v)
 if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
 LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
 end
@@ -309,7 +309,7 @@ LibraryESP:AddESP(Player.Character, "[Downed]\n" .. v.Name, Color3.fromRGB(0,255
 end
 end	
 end
-PlayersESP = workspace.DescendantAdded:Connect(function(v)
+PlayersESP = workspace.Game.Players.ChildAdded:Connect(function(v)
 if Player ~= game:GetService("Players").LocalPlayer then
 if not Player:GetAttribute('Downed') then
 LibraryESP:AddESP(Player.Character, v.Name, Color3.fromRGB(0,255,0), "PlayersESP")
