@@ -46,17 +46,17 @@ _G.AFK = value
 if value then
 local part = Instance.new("Part", workspace)
    part.Anchored = true
-   part.CFrame = CFrame.new(1000, 996, 1000)
+   part.CFrame = CFrame.new(100, 996, 100)
    part.Material = "Neon"
    part.Size = Vector3.new(1000,1,1000)
 local part2 = Instance.new("Part", workspace)
    part2.Anchored = true
-   part2.CFrame = CFrame.new(1000, 1496, 1000)
+   part2.CFrame = CFrame.new(100, 1496, 100)
    part2.Material = "Neon"
    part2.Size = Vector3.new(1000,1,1000)
 local part3 = Instance.new("Part", workspace)
    part3.Anchored = true
-   part3.CFrame = CFrame.new(1000, 1996, 1000)
+   part3.CFrame = CFrame.new(100, 1996, 100)
    part3.Material = "Neon"
    part3.Size = Vector3.new(1000,1,1000)
 end
@@ -229,6 +229,7 @@ Tabs.Main:AddToggle({
 if value then
 local ScreenGui = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer.PlayerGui)
 ScreenGui.Name = "RoundTimerScreen"
+ScreenGui.ResetOnSpawn = false
 local Frame = Instance.new("Frame", ScreenGui)
 Frame.Position = UDim2.new(0.425,0,0.1,0)
 Frame.BackgroundColor3 = Color3.new(0,0,0)
@@ -280,12 +281,12 @@ Tabs.Visual:AddToggle({
 if value then
 for i, v in pairs(workspace.Game.Players:GetChildren()) do
 if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
-Library:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
+LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
 end
 end
 NextbotsESP = workspace.DescendantAdded:Connect(function(v)
 if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
-Library:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
+LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
 end
 end)
 else
@@ -303,7 +304,6 @@ if Player ~= game:GetService("Players").LocalPlayer then
 if not Player:GetAttribute('Downed') then
 LibraryESP:AddESP(Player.Character, v.Name, Color3.fromRGB(0,255,0), "PlayersESP")
 end
-elseif Player ~= game:GetService("Players").LocalPlayer then
 if Player:GetAttribute('Downed') then
 LibraryESP:AddESP(Player.Character, "[Downed]\n" .. v.Name, Color3.fromRGB(0,255,255), "DownedPlayersESP")
 end
@@ -314,7 +314,6 @@ if Player ~= game:GetService("Players").LocalPlayer then
 if not Player:GetAttribute('Downed') then
 LibraryESP:AddESP(Player.Character, v.Name, Color3.fromRGB(0,255,0), "PlayersESP")
 end
-elseif Player ~= game:GetService("Players").LocalPlayer then
 if Player:GetAttribute('Downed') then
 LibraryESP:AddESP(Player.Character, "[Downed]\n" .. v.Name, Color3.fromRGB(0,255,255), "DownedPlayersESP")
 end
