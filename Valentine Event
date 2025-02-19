@@ -1,24 +1,3 @@
-function Tracers(Child, Color)
-task.spawn(function()
-local traceDrawing = Drawing.new('Line') do
-end
-game:GetService("RunService").RenderStepped:Connect(function()
-if _G.TracerNextbots and Child.Parent ~= nil then
-local camera = workspace.CurrentCamera
-local vector, onScreen = camera:WorldToViewportPoint(Child:IsA("Model") and Child:GetPivot().Position or Child:IsA("BasePart") and Child.Position)
-if onScreen then
-traceDrawing.From = Vector2.new(camera.ViewportSize.X /2, camera.ViewportSize.Y / 1)
-traceDrawing.To = Vector2.new(vector.X, vector.Y)
-traceDrawing.Visible = true
-else
-traceDrawing.Visible = false
-end
-else
-traceDrawing.Visible = false
-end
-end)
-end)
-end
 print("Anti AFK")
 local GC = getconnections or get_signal_cons
 if GC then
@@ -303,12 +282,12 @@ Tabs.Visual:AddToggle({
 if value then
 for i, v in pairs(workspace.Game.Players:GetChildren()) do
 if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
-LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
+LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 14, "Nextbots_ESP")
 end
 end
 NextbotsESP = workspace.Game.Players.ChildAdded:Connect(function(v)
 if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
-LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
+LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 14, "Nextbots_ESP")
 end
 end)
 else
@@ -322,53 +301,40 @@ Tabs.Visual:AddToggle({
 	Callback = function(value)
 if value then
 for _,Player in pairs(game:GetService("Players"):GetPlayers()) do
-if Player ~= game:GetService("Players").LocalPlayer then
-if not Player:GetAttribute('Downed') then
-LibraryESP:AddESP(Player.Character, v.Name, Color3.fromRGB(0,255,0), "PlayersESP")
+if Player ~= game:GetService("Players").LocalPlayer and not Player:FindFirstChild("PlayerESP") then
+LibraryESP:AddESP(Player.Character, Player.DisplayName .. "\n(@" .. Player.Name .. ")", Color3.new(1,1,1), 14, "PlayerESP")
 end
-elseif Player ~= game:GetService("Players").LocalPlayer then
-if Player:GetAttribute('Downed') then
-LibraryESP:AddESP(Player.Character, "[Downed]\n" .. v.Name, Color3.fromRGB(0,255,255), "DownedPlayersESP")
 end
-end	
+PlayersESP = workspace.Game.Players.ChildAdded:Connect(function()
+for _,Player in pairs(game:GetService("Players"):GetPlayers()) do
+if Player ~= game:GetService("Players").LocalPlayer and not Player:FindFirstChild("PlayerESP") then
+LibraryESP:AddESP(Player.Character, Player.DisplayName .. "\n(@" .. Player.Name .. ")", Color3.new(1,1,1), 14, "PlayerESP")
 end
-PlayersESP = workspace.Game.Players.ChildAdded:Connect(function(v)
-if Player ~= game:GetService("Players").LocalPlayer then
-if not Player:GetAttribute('Downed') then
-LibraryESP:AddESP(Player.Character, v.Name, Color3.fromRGB(0,255,0), "PlayersESP")
 end
-elseif Player ~= game:GetService("Players").LocalPlayer then
-if Player:GetAttribute('Downed') then
-LibraryESP:AddESP(Player.Character, "[Downed]\n" .. v.Name, Color3.fromRGB(0,255,255), "DownedPlayersESP")
-end
-end	
 end)
 else
 PlayersESP:Disconnect()
-LibraryESP:Delete("PlayersESP")
-LibraryESP:Delete("DownedPlayersESP")
+LibraryESP:Delete("PlayerESP")
 end
 end})
-Tabs.Visual:AddSection({"Tracers"})
+Tabs.Visual:AddSection({"Settings"})
 Tabs.Visual:AddToggle({
-	Name = "Nextbots Tracers",
-	Description = "Nextbots Tracers",
+	Name = "Tracers ESP",
+	Description = "Nextbots,Player Tracers",
 	Callback = function(value)
-_G.TracerNextbots = value
-if value then
-for i, v in pairs(workspace.Game.Players:GetChildren()) do
-if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
-Tracers(v, Color3.new(1))
-end
-end
-NextbotsTracers = workspace.Game.Players.ChildAdded:Connect(function(v)
-if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
-Tracers(v, Color3.new(1))
-end
-end)
-else
-NextbotsTracers:Disconnect()
-end
+getgenv().TracerESP = value
+end})
+Tabs.Visual:AddToggle({
+	Name = "Distance ESP",
+	Description = "Now, ESP will have 'Distance'",
+	Callback = function(value)
+getgenv().DistanceESP = value
+end})
+Tabs.Visual:AddToggle({
+	Name = "Rainbow ESP",
+	Description = "Now, ESP will 'Rainbow'",
+	Callback = function(value)
+getgenv().RainbowESP = value
 end})
 Tabs.Visual:AddSection({"Server"})
 Tabs.Visual:AddButton({
