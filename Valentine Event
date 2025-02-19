@@ -1,3 +1,30 @@
+function Tracers(Child, Color)
+task.spawn(function()
+local traceDrawing = Drawing.new('Line') do
+end
+game:GetService("RunService").RenderStepped:Connect(function()
+if not getgenv().RainbowESP then
+traceDrawing.Color = Color
+end
+if getgenv().RainbowESP then
+traceDrawing.Color = Color3.fromHSV(tick() % 10 / 10, 1, 1)
+end
+if _G.TracerESP and Child.Parent ~= nil then
+local camera = workspace.CurrentCamera
+local vector, onScreen = camera:WorldToViewportPoint(Child:IsA("Model") and Child:GetPivot().Position or Child:IsA("BasePart") and Child.Position)
+if onScreen then
+traceDrawing.From = Vector2.new(camera.ViewportSize.X /2, camera.ViewportSize.Y / 1)
+traceDrawing.To = Vector2.new(vector.X, vector.Y)
+traceDrawing.Visible = true
+else
+traceDrawing.Visible = false
+end
+else
+traceDrawing.Visible = false
+end
+end)
+end)
+end
 print("Anti AFK")
 local GC = getconnections or get_signal_cons
 if GC then
@@ -17,7 +44,7 @@ end)
 end
 local Library = loadstring(game:HttpGet("https://github.com/realredz/RedzLibV5/blob/main/Source.lua?raw=true"))()
 
-local LibraryESP = loadstring(game:HttpGet("https://github.com/Cold-Script/ESPBETA/blob/main/Esp?raw=true"))()
+local LibraryESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/RGV-devid/Scripts/refs/heads/main/ESP"))()
 
 local Window = Library:MakeWindow({"YOUHUB | [💓UPD] Evade | User : " .. game.Players.LocalPlayer.DisplayName, "Version 1.2", "testando-redzLibv5.json"})
 Window:AddMinimizeButton({
@@ -304,6 +331,7 @@ if Player ~= game:GetService("Players").LocalPlayer then
 if not Player:GetAttribute('Downed') then
 LibraryESP:AddESP(Player.Character, v.Name, Color3.fromRGB(0,255,0), "PlayersESP")
 end
+elseif Player ~= game:GetService("Players").LocalPlayer then
 if Player:GetAttribute('Downed') then
 LibraryESP:AddESP(Player.Character, "[Downed]\n" .. v.Name, Color3.fromRGB(0,255,255), "DownedPlayersESP")
 end
@@ -314,15 +342,37 @@ if Player ~= game:GetService("Players").LocalPlayer then
 if not Player:GetAttribute('Downed') then
 LibraryESP:AddESP(Player.Character, v.Name, Color3.fromRGB(0,255,0), "PlayersESP")
 end
+elseif Player ~= game:GetService("Players").LocalPlayer then
 if Player:GetAttribute('Downed') then
 LibraryESP:AddESP(Player.Character, "[Downed]\n" .. v.Name, Color3.fromRGB(0,255,255), "DownedPlayersESP")
 end
-end
+end	
 end)
 else
 PlayersESP:Disconnect()
 LibraryESP:Delete("PlayersESP")
 LibraryESP:Delete("DownedPlayersESP")
+end
+end})
+Tabs.Visual:AddSection({"Tracers"})
+Tabs.Visual:AddToggle({
+	Name = "Nextbots Tracers",
+	Description = "Nextbots Tracers",
+	Callback = function(value)
+if value then
+for i, v in pairs(workspace.Game.Players:GetChildren()) do
+if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
+LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
+end
+end
+NextbotsESP = workspace.Game.Players.ChildAdded:Connect(function(v)
+if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
+LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
+end
+end)
+else
+NextbotsESP:Disconnect()
+LibraryESP:Delete("Nextbots_ESP")
 end
 end})
 Tabs.Visual:AddSection({"Server"})
