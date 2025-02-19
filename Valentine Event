@@ -2,6 +2,7 @@ function Tracers(Child, Color)
 task.spawn(function()
 local traceDrawing = Drawing.new('Line') do
 end
+game:GetService("RunService").RenderStepped:Connect(function()
 if _G.TracerNextbots and Child.Parent ~= nil then
 local camera = workspace.CurrentCamera
 local vector, onScreen = camera:WorldToViewportPoint(Child:IsA("Model") and Child:GetPivot().Position or Child:IsA("BasePart") and Child.Position)
@@ -115,11 +116,12 @@ Tabs.Main:AddButton({
 game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart').CFrame = CFrame.new(0, -10000, 0)
 end})
 Tabs.Main:AddSection({"Players"})
+_G.SetSpeedFly = 50
 Tabs.Main:AddSlider({
   Name = "Fly speed",
   Description = "Select a Speed Fly",
-  Min = 1,
-  Max = 100,
+  Min = 50,
+  Max = 300,
   Increase = 1,
   Default = 1,
   Callback = function(value)
