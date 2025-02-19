@@ -2,14 +2,7 @@ function Tracers(Child, Color)
 task.spawn(function()
 local traceDrawing = Drawing.new('Line') do
 end
-game:GetService("RunService").RenderStepped:Connect(function()
-if not getgenv().RainbowESP then
-traceDrawing.Color = Color
-end
-if getgenv().RainbowESP then
-traceDrawing.Color = Color3.fromHSV(tick() % 10 / 10, 1, 1)
-end
-if _G.TracerESP and Child.Parent ~= nil then
+if _G.TracerNextbots and Child.Parent ~= nil then
 local camera = workspace.CurrentCamera
 local vector, onScreen = camera:WorldToViewportPoint(Child:IsA("Model") and Child:GetPivot().Position or Child:IsA("BasePart") and Child.Position)
 if onScreen then
@@ -359,20 +352,20 @@ Tabs.Visual:AddToggle({
 	Name = "Nextbots Tracers",
 	Description = "Nextbots Tracers",
 	Callback = function(value)
+_G.TracerNextbots = value
 if value then
 for i, v in pairs(workspace.Game.Players:GetChildren()) do
 if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
-LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
+Tracers(v, Color3.new(1))
 end
 end
-NextbotsESP = workspace.Game.Players.ChildAdded:Connect(function(v)
+NextbotsTracers = workspace.Game.Players.ChildAdded:Connect(function(v)
 if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
-LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 20, "Nextbots_ESP")
+Tracers(v, Color3.new(1))
 end
 end)
 else
-NextbotsESP:Disconnect()
-LibraryESP:Delete("Nextbots_ESP")
+NextbotsTracers:Disconnect()
 end
 end})
 Tabs.Visual:AddSection({"Server"})
