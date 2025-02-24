@@ -295,34 +295,12 @@ NextbotsESP:Disconnect()
 LibraryESP:Delete("Nextbots_ESP")
 end
 end})
-Tabs.Visual:AddToggle({
-	Name = "Players ESP",
-	Description = "Players ESP",
-	Callback = function(value)
-if value then
-for _,Player in pairs(game:GetService("Players"):GetPlayers()) do
-if Player ~= game:GetService("Players").LocalPlayer and not Player:FindFirstChild("PlayerESP") then
-LibraryESP:AddESP(Player.Character, Player.DisplayName .. "\n(@" .. Player.Name .. ")", Color3.new(1,1,1), 14, "PlayerESP")
-end
-end
-PlayersESP = workspace.Game.Players.ChildAdded:Connect(function()
-for _,Player in pairs(game:GetService("Players"):GetPlayers()) do
-if Player ~= game:GetService("Players").LocalPlayer and not Player:FindFirstChild("PlayerESP") then
-LibraryESP:AddESP(Player.Character, Player.DisplayName .. "\n(@" .. Player.Name .. ")", Color3.new(1,1,1), 14, "PlayerESP")
-end
-end
-end)
-else
-PlayersESP:Disconnect()
-LibraryESP:Delete("PlayerESP")
-end
-end})
 Tabs.Visual:AddSection({"Settings"})
 Tabs.Visual:AddToggle({
-	Name = "Tracers ESP",
-	Description = "Nextbots,Player Tracers",
+	Name = "Text ESP",
+	Description = "Now, ESP will have 'Text'",
 	Callback = function(value)
-getgenv().TracerESP = value
+getgenv().TextESP = value
 end})
 Tabs.Visual:AddToggle({
 	Name = "Distance ESP",
