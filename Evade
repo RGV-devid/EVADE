@@ -47,18 +47,21 @@ if value then
 local part = Instance.new("Part", workspace)
    part.Anchored = true
    part.CFrame = CFrame.new(100, 996, 100)
-   part.Material = "Neon"
-   part.Size = Vector3.new(1000,1,1000)
+   part.Material = "Plastic"
+   part.Transparency = 1
+   part.Size = Vector3.new(10000,1,10000)
 local part2 = Instance.new("Part", workspace)
    part2.Anchored = true
    part2.CFrame = CFrame.new(100, 1496, 100)
    part2.Material = "Neon"
-   part2.Size = Vector3.new(1000,1,1000)
+   part2.Transparency = 1
+   part2.Size = Vector3.new(10000,1,10000)
 local part3 = Instance.new("Part", workspace)
    part3.Anchored = true
    part3.CFrame = CFrame.new(100, 1996, 100)
    part3.Material = "Neon"
-   part3.Size = Vector3.new(1000,1,1000)
+   part3.Transparency = 1
+   part3.Size = Vector3.new(10000,1,10000)
 end
 while _G.AFK do wait(0.3)
 local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
@@ -208,10 +211,11 @@ ScreenGui.Name = "AFKScreen"
 local ImageLabel = Instance.new("TextLabel", ScreenGui)
 ImageLabel.Position = UDim2.new(0,0,0,0)
 ImageLabel.BackgroundColor3 = Color3.fromRGB(90,0,255)
+ImageLabel.BackgroundTransparency = 0.5
 ImageLabel.Size = UDim2.new(1,0,1,0)
 ImageLabel.Text = "YOUHUB\nAFK Screen\nPlaytime:" .. workspace.DistributedGameTime
 ImageLabel.TextSize = "50"
-ImageLabel.Font = "Roboto"
+ImageLabel.Font = "Bodoni"
 ImageLabel.TextColor3 = Color3.new(1,1,1)
 game:GetService("RunService").RenderStepped:Connect(function()
 ImageLabel.Text = string.format("%s%1.f", "YOUHUB\nAFK Screen\nPlaytime:",workspace.DistributedGameTime)
@@ -243,7 +247,7 @@ ImageLabel.BackgroundTransparency = 0.75
 ImageLabel.Size = UDim2.new(0,0,0,0)
 ImageLabel.Text = "Round Timer:\n" .. workspace.Game.Stats:GetAttribute("Timer") .. "s"
 ImageLabel.TextSize = "14"
-ImageLabel.Font = "GothamBlack"
+ImageLabel.Font = "Roboto"
 ImageLabel.TextColor3 = Color3.new(1,1,1)
 local UiCorner = Instance.new("UICorner", Frame)
 local UiStroke = Instance.new("UIStroke", Frame)
@@ -276,8 +280,8 @@ end})
 
 Tabs.Visual:AddSection({"ESP"})
 Tabs.Visual:AddToggle({
-	Name = "Nextbots ESP",
-	Description = "Nextbots ESP",
+	Name = "AI ESP",
+	Description = "AI ESP",
 	Callback = function(value)
 if value then
 for i, v in pairs(workspace.Game.Players:GetChildren()) do
