@@ -28,7 +28,7 @@ Beside.Farm:Dropdown({
 	Multi = false,
 	Required = false,
 	Options = {"1000","1500","2000"},
-	Default = "1000",
+	Default = 1,
 	Callback = function(v)
 _G.Elevation = v
 end})
@@ -92,7 +92,7 @@ Beside.Farm:Toggle({
 	Callback = function(v)
 _G.AutoFarmCash = v
 while _G.AutoFarmCash do
-for i, v in next, workspace.Game.Players:GetChildren() do
+for i, v in ipairs(workspace.Game.Players:GetChildren()) do
 if v:GetAttribute('Downed') then
 pcall(function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.HumanoidRootPart.Position) - Vector3.new(0,5,0)
