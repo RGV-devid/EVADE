@@ -63,3 +63,26 @@ local hrp = char:WaitForChild("HumanoidRootPart", 3)
 hrp.CFrame = CFrame.new(100, _G.Elevation, 100)
 	end
 end})
+Beside.Farm:Divider()
+Beside.Farm:Toggle({
+	Name = "Auto Farm Tickets",
+	Default = false,
+	Callback = function(v)
+_G.AutoFarmTickets = v
+while task.wait(0.1) and _G.AutoFarmTickets do
+if not value then
+break
+end
+local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
+local tickets = workspace.Game.Effects.Tickets
+local hrp = char:WaitForChild("HumanoidRootPart", 3)
+if hrp == nil then
+return
+end
+for i, v in next, tickets:GetDescendants() do
+if v.IsA(v, "BasePart") and v.Name == "HumanoidRootPart" then
+hrp.CFrame = CFrame.new(v.Position)
+end
+end
+end
+end})
