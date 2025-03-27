@@ -22,7 +22,7 @@ local Beside = {
 local Section = {
 	Farm = Beside.Farm:Header({Name = "Farm"}),
 }
-Section.Farm:Dropdown({
+Beside.Farm:Dropdown({
 	Name = "Elevation",
 	Search = true,
 	Multi = false,
@@ -32,7 +32,7 @@ Section.Farm:Dropdown({
 	Callback = function(v)
 _G.Elevation = v
 end})
-Section.Farm:Toggle({
+Beside.Farm:Toggle({
 	Name = "Auto Farm XP",
 	Default = false,
 	Callback = function(v)
