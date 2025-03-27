@@ -5,6 +5,7 @@ local Window = MacLib:Window({
 	Subtitle = "v0.0.1",
 	Size = UDim2.fromOffset(758, 500),
 	DragStyle = 1,
+		MainText = "[🍀 ST.PATRICK] EVADE]",
 	DisabledWindowControls = {},
 	ShowUserInfo = true,
 	Keybind = Enum.KeyCode.RightControl,
