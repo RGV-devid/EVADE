@@ -20,7 +20,7 @@ local Beside = {
 	Farm = Tabs.Main:Section({ Side = "Left" }),
 }
 local Section = {
-	Farm = Beside.Farm:Header({Name = "Farm"}),
+	Farm = Beside.Farm:Header({ Name = "Farm" }),
 }
 Beside.Farm:Dropdown({
 	Name = "Elevation",
