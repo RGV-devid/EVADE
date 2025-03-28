@@ -99,5 +99,6 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Humano
 end)
 end
 end
+wait()
 end
 end})
