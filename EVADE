@@ -57,7 +57,7 @@ local part3 = Instance.new("Part", workspace)
    part3.Transparency = 1
    part3.Size = Vector3.new(10000,1,10000)
 end
-while _G.AutoFarmXP do wait(0.3)
+while _G.AutoFarmXP do wait(1)
 local char = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
 local hrp = char:WaitForChild("HumanoidRootPart", 3)
 hrp.CFrame = CFrame.new(100, _G.Elevation, 100)
@@ -69,7 +69,7 @@ Beside.Farm:Toggle({
 	Default = false,
 	Callback = function(v)
 _G.AutoFarmTickets = v
-while task.wait(0.1) and _G.AutoFarmTickets do
+while task.wait(1) and _G.AutoFarmTickets do
 if not v then
 break
 end
@@ -91,15 +91,27 @@ Beside.Farm:Toggle({
 	Default = false,
 	Callback = function(v)
 _G.AutoFarmCash = v
+if v then
+NoclipAutoFarmCash = game:GetService("RunService").Stepped:Connect(function()
+if game.Players.LocalPlayer and game.Players.LocalPlayer.Character then
+for _, part in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+if part:IsA("BasePart") then
+part.CanCollide = false
+end
+end
+end
+end)
+else
+if NoclipAutoFarmCash then
+NoclipAutoFarmCash:Disconnect()
+NoclipAutoFarmCash = nil
+end
+end
 while _G.AutoFarmCash do
 for i, v in ipairs(workspace.Game.Players:GetChildren()) do
 if v:GetAttribute('Downed') then
 pcall(function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.HumanoidRootPart.Position) - Vector3.new(0,-15,0)
-wait(0.3)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.HumanoidRootPart.Position) - Vector3.new(15,-15,0)
-wait(0.3)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.HumanoidRootPart.Position) - Vector3.new(0,-15,15)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.HumanoidRootPart.Position) - Vector3.new(0,15,0)
 end)
 end
 end
