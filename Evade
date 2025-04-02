@@ -196,7 +196,8 @@ Tabs.Main:AddToggle({
 	Name = "Auto Whistle",
 	Description = "Whistle Auto",
 	Callback = function(value)
-while value do wait(1)
+_G.AutoWhistle = value
+while _G.AutoWhistle do wait(1)
 game:GetService("ReplicatedStorage").Events.Character.Whistle:FireServer(true)
 end
 end})
