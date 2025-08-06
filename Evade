@@ -24,7 +24,7 @@ Window:AddMinimizeButton({
 Button = { ImageColor3 = Color3.fromRGB(90,0,255),Image = "rbxassetid://95869322194132", BackgroundColor3 = Color3.fromRGB(0,0,0), BackgroundTransparency = 0 },
 Corner = { CornerRadius = UDim.new(0, 5) }
 })
-Instance.new("UIStroke", game:GetService("CoreGui")["redz Library V5"].Hub).Color = Color3.fromRGB(90,0,255))
+Instance.new("UIStroke", game:GetService("CoreGui")["redz Library V5"].Hub).Color = Color3.fromRGB(90,0,255)
 Instance.new("UIStroke", game:GetService("CoreGui")["redz Library V5"].ImageButton).Color = Color3.fromRGB(90,0,255)
 local Tabs = {
 Main = Window:MakeTab({"Main", "Home"}),
@@ -96,7 +96,7 @@ end})
 Tabs.Main:AddToggle({
 	Name = "Auto Cash Farm",
 	Description = "Auto Farm Cash",
-	Callback = function(value)
+	Callback = function(v)
 _G.AutoFarmCash = v
 if v then
 NoclipAutoFarmCash = game:GetService("RunService").Stepped:Connect(function()
