@@ -19,7 +19,7 @@ local Library = loadstring(game:HttpGet("https://github.com/realredz/RedzLibV5/b
 
 local LibraryESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/RGV-devid/Scripts/refs/heads/main/ESP"))()
 
-local Window = Library:MakeWindow({"YOUHUB | [ 🍀ST.PATRICK ] Evade | User : " .. game.Players.LocalPlayer.DisplayName, "Version 1.2", "testando-redzLibv5.json"})
+local Window = Library:MakeWindow({"YOUHUB | Evade | User : " .. game.Players.LocalPlayer.DisplayName, "Version 1.2", "testando-redzLibv5.json"})
 Window:AddMinimizeButton({
 Button = { Image = "rbxassetid://95869322194132", BackgroundColor3 = Color3.fromRGB(0,0,0), BackgroundTransparency = 0 },
 Corner = { CornerRadius = UDim.new(0, 5) }
@@ -47,20 +47,20 @@ if value then
 local part = Instance.new("Part", workspace)
    part.Anchored = true
    part.CFrame = CFrame.new(100, 996, 100)
-   part.Material = "Plastic"
-   part.Transparency = 1
+   part.Material = "Glass"
+   part.Transparency = 0
    part.Size = Vector3.new(10000,1,10000)
 local part2 = Instance.new("Part", workspace)
    part2.Anchored = true
    part2.CFrame = CFrame.new(100, 1496, 100)
    part2.Material = "Neon"
-   part2.Transparency = 1
+   part2.Transparency = 0
    part2.Size = Vector3.new(10000,1,10000)
 local part3 = Instance.new("Part", workspace)
    part3.Anchored = true
    part3.CFrame = CFrame.new(100, 1996, 100)
-   part3.Material = "Neon"
-   part3.Transparency = 1
+   part3.Material = "Plastic"
+   part3.Transparency = 0
    part3.Size = Vector3.new(10000,1,10000)
 end
 while _G.AFK do wait(0.3)
@@ -290,7 +290,7 @@ if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ES
 LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 14, "Nextbots_ESP")
 end
 end
-NextbotsESP = workspace.Game.Players.ChildAdded:Connect(function(v)
+NextbotsESP = workspace.Game.Players.DescendantAdded:Connect(function(v)
 if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
 LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 14, "Nextbots_ESP")
 end
