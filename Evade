@@ -25,7 +25,7 @@ Button = { ImageColor3 = Color3.fromRGB(90,0,255),Image = "rbxassetid://95869322
 Corner = { CornerRadius = UDim.new(0, 5) }
 })
 Instance.new("UIStroke", game:GetService("CoreGui")["redz Library V5"].Hub).Color = Color3.fromRGB(90,0,255))
-Instance.new("UIStroke", game:GetService("CoreGui")["redz Library V5"].ImageButton.Color = Color3.fromRGB(90,0,255))
+Instance.new("UIStroke", game:GetService("CoreGui")["redz Library V5"].ImageButton).Color = Color3.fromRGB(90,0,255)
 local Tabs = {
 Main = Window:MakeTab({"Main", "Home"}),
 Visual = Window:MakeTab({"Visual", "Camera"})
@@ -91,6 +91,39 @@ if v.IsA(v, "BasePart") and v.Name == "HumanoidRootPart" then
 hrp.CFrame = CFrame.new(v.Position)
 end
 end
+end
+end})
+Tabs.Main:AddToggle({
+	Name = "Auto Cash Farm",
+	Description = "Auto Farm Cash",
+	Callback = function(value)
+_G.AutoFarmCash = v
+if v then
+NoclipAutoFarmCash = game:GetService("RunService").Stepped:Connect(function()
+if game.Players.LocalPlayer and game.Players.LocalPlayer.Character then
+for _, part in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+if part:IsA("BasePart") then
+part.CanCollide = false
+end
+end
+end
+end)
+else
+if NoclipAutoFarmCash then
+NoclipAutoFarmCash:Disconnect()
+NoclipAutoFarmCash = nil
+end
+end
+while _G.AutoFarmCash do
+for i, v in ipairs(workspace.Game.Players:GetChildren()) do
+if v:GetAttribute('Downed') then
+pcall(function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.HumanoidRootPart.Position) - Vector3.new(0,5,0)
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Character"):WaitForChild("Interact"):FireServer("Revive", true, v.Name)
+end)
+end
+end
+wait()
 end
 end})
 Tabs.Main:AddButton({
