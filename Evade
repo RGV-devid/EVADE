@@ -21,9 +21,11 @@ local LibraryESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/RG
 
 local Window = Library:MakeWindow({"YOUHUB | Evade | User : " .. game.Players.LocalPlayer.DisplayName, "Version 1.2", "testando-redzLibv5.json"})
 Window:AddMinimizeButton({
-Button = { Image = "rbxassetid://95869322194132", BackgroundColor3 = Color3.fromRGB(0,0,0), BackgroundTransparency = 0 },
+Button = { ImageColor3 = Color3.fromRGB(0,255,255),Image = "rbxassetid://95869322194132", BackgroundColor3 = Color3.fromRGB(0,0,0), BackgroundTransparency = 0 },
 Corner = { CornerRadius = UDim.new(0, 5) }
 })
+Instance.new("UIStroke", game:GetService("CoreGui")["redz Library V5"].Hub).Color = Color3.fromRGB(0,255,255)
+Instance.new("UIStroke", game:GetService("CoreGui")["redz Library V5"].ImageButton).Color = Color3.fromRGB(0,255,255)
 local Tabs = {
 Main = Window:MakeTab({"Main", "Home"}),
 Visual = Window:MakeTab({"Visual", "Camera"})
@@ -290,9 +292,11 @@ if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ES
 LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 14, "Nextbots_ESP")
 end
 end
-NextbotsESP = workspace.Game.Players.DescendantAdded:Connect(function(v)
+NextbotsESP = workspace.Game.Players.ChildAdded:Connect(function(v)
+for i, v in pairs(workspace.Game.Players:GetChildren()) do
 if not game.Players:FindFirstChild(v.Name) and not v:FindFirstChild("Nextbots_ESP") then
 LibraryESP:AddESP(v, v.Name, Color3.fromRGB(255,0,0), 14, "Nextbots_ESP")
+end
 end
 end)
 else
@@ -301,12 +305,6 @@ LibraryESP:Delete("Nextbots_ESP")
 end
 end})
 Tabs.Visual:AddSection({"Settings"})
-Tabs.Visual:AddToggle({
-	Name = "Text ESP",
-	Description = "Now, ESP will have 'Text'",
-	Callback = function(value)
-getgenv().TextESP = value
-end})
 Tabs.Visual:AddToggle({
 	Name = "Distance ESP",
 	Description = "Now, ESP will have 'Distance'",
