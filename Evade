@@ -21,11 +21,11 @@ local LibraryESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/RG
 
 local Window = Library:MakeWindow({"YOUHUB | Evade | User : " .. game.Players.LocalPlayer.DisplayName, "Version 1.2", "testando-redzLibv5.json"})
 Window:AddMinimizeButton({
-Button = { ImageColor3 = Color3.fromRGB(0,255,255),Image = "rbxassetid://95869322194132", BackgroundColor3 = Color3.fromRGB(0,0,0), BackgroundTransparency = 0 },
+Button = { ImageColor3 = Color3.fromRGB(90,0,255),Image = "rbxassetid://95869322194132", BackgroundColor3 = Color3.fromRGB(0,0,0), BackgroundTransparency = 0 },
 Corner = { CornerRadius = UDim.new(0, 5) }
 })
-Instance.new("UIStroke", game:GetService("CoreGui")["redz Library V5"].Hub).Color = Color3.fromRGB(0,255,255)
-Instance.new("UIStroke", game:GetService("CoreGui")["redz Library V5"].ImageButton).Color = Color3.fromRGB(0,255,255)
+Instance.new("UIStroke", game:GetService("CoreGui")["redz Library V5"].Hub).Color = Color3.fromRGB(90,0,255))
+Instance.new("UIStroke", game:GetService("CoreGui")["redz Library V5"].ImageButton.Color = Color3.fromRGB(90,0,255))
 local Tabs = {
 Main = Window:MakeTab({"Main", "Home"}),
 Visual = Window:MakeTab({"Visual", "Camera"})
@@ -254,7 +254,7 @@ ImageLabel.Font = "Roboto"
 ImageLabel.TextColor3 = Color3.new(1,1,1)
 local UiCorner = Instance.new("UICorner", Frame)
 local UiStroke = Instance.new("UIStroke", Frame)
-UiStroke.Color = Color3.fromRGB(14,174,255)
+UiStroke.Color = Color3.fromRGB(90,0,255)
 UiStroke.Thickness = 2
 game:GetService("RunService").RenderStepped:Connect(function()
 ImageLabel.Text = "Round Timer:\n" .. workspace.Game.Stats:GetAttribute("Timer") .. "s"
